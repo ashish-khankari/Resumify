@@ -4,6 +4,7 @@ import LoginScreen from "../screens/Login/LoginScreen";
 import RegisterScreen from "../screens/Register/RegisterScreen";
 import WelcomeScreen from "../screens/Welcome/WelcomeScreen";
 import MyTabs from "./BottomTabNavigation";
+import DrawerNavigation from "./DrawerNavigation";
 
 const AppNavigation = () => {
     const Stack = createNativeStackNavigator();
@@ -23,7 +24,7 @@ const AppNavigation = () => {
             />
             <Stack.Screen
                 name={APP_ROUTES.STACK.HOME}
-                component={MyTabs}
+                component={DrawerNavigation}
             />
         </Stack.Navigator>
     )
