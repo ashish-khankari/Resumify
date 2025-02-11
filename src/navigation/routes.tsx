@@ -15,7 +15,7 @@ export const APP_ROUTES = {
         PROFILE: 'Profile',
     },
     DRAWER: {
-        HOME: "Home",
+        HOMEDRAWER: "HomeDrawer",
         LOGOUT: 'Logout',
         USER_AGREEMENT : "UserAgreement",
         PRIVACY_POLICY: 'PrivacyPolicy',
