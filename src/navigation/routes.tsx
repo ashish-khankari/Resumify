@@ -20,5 +20,6 @@ export const APP_ROUTES = {
         USER_AGREEMENT : "UserAgreement",
         PRIVACY_POLICY: 'PrivacyPolicy',
         SAVED_RESUME: 'SavedResume',
+        CATEGORY: 'Categoey',
     }
 }
