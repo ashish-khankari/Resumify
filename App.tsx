@@ -5,14 +5,14 @@ import React from 'react';
 // import { Provider } from 'react-redux';
 // import { store } from './src/redux/store';
 // import Accordion from './src/screens/TodoList/Accordion';
-import {NavigationContainer} from '@react-navigation/native'
+import {NavigationContainer} from '@react-navigation/native';
 import AppNavigation from './src/navigation/StackNavigation';
 // import TodoListScreen from './src/screens/TodoList/TodoListScreen';
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <AppNavigation/>
+      <AppNavigation />
     </NavigationContainer>
   );
 }
