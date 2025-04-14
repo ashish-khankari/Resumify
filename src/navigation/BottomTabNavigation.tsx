@@ -22,7 +22,7 @@ const screenOptions = ({route}: {route: any}) => ({
     color: string;
     size: number;
   }) => {
-    let iconName;
+    let iconName
     let iconTintColor = focused ? Colors.primary : Colors.black;
     switch (route.name) {
       case APP_ROUTES.BOTTOM.HomeBottomTab:
