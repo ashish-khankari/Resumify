@@ -25,7 +25,6 @@ const RegisterScreen: React.FC = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const isRegistered = useAppSelector(state => state.userRegister.success);
-  console.log('isRegistered', isRegistered)
   const isLoading = useAppSelector(state => state.userRegister.isLoading);
 
   const inputRef2 = React.useRef<TextInput>(null);
