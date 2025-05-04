@@ -17,8 +17,7 @@ import {
   showToast,
   validateEmail,
 } from '../../../globalFunctions/globalFunction';
-import axios from 'axios';
-import {registerUsers} from '../../../redux/slice/authSlice/authSlice';
+import {registerUsers, resetToast} from '../../../redux/slice/authSlice/authSlice';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 
 const RegisterScreen: React.FC = () => {
@@ -26,11 +25,26 @@ const RegisterScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const isRegistered = useAppSelector(state => state.userRegister.success);
   const isLoading = useAppSelector(state => state.userRegister.isLoading);
+  const registerError = useAppSelector(state => state.userRegister.error);
 
   const inputRef2 = React.useRef<TextInput>(null);
   const inputRef3 = React.useRef<TextInput>(null);
   const inputRef4 = React.useRef<TextInput>(null);
   const inputRef5 = React.useRef<TextInput>(null);
+
+
+  useEffect(() => {
+    dispatch(resetToast());
+    if (isRegistered) {
+      showToast({type: 'success', message: 'You are successfully registered'});
+    } else if (registerError) {
+      showToast({
+        type: 'error',
+        message: registerError || 'An unknown error occurred',
+      });
+    }
+
+  }, [isRegistered, registerError, dispatch]);
 
   const [formData, setFormData] = React.useState({
     username: '',
