@@ -1,5 +1,6 @@
-import React from 'react';
-import {ScrollView, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {ScrollView, View, TextInput} from 'react-native';
+import {useDispatch} from 'react-redux';
 import Container from '../../../components/Layouts/Container';
 import WelcomeTitle from '../../../components/molecules/WelcomeTitle/WelcomeTitle';
 import {Colors} from '../../../theme';
@@ -10,19 +11,93 @@ import SocialAuth from '../../../components/molecules/SocialAuth/SocialAuth';
 import {useNavigation} from '@react-navigation/native';
 import {APP_ROUTES} from '../../../navigation/routes';
 import {styles} from './Styles/RegisterScreenStyles';
-import {TextInput} from 'react-native';
+import {registerFormType} from '../../../globalFunctions/GlobalTypes';
+import {emailRegex} from '../../../globalFunctions/globalData';
+import {
+  showToast,
+  validateEmail,
+} from '../../../globalFunctions/globalFunction';
+import axios from 'axios';
+import {registerUsers} from '../../../redux/slice/authSlice/authSlice';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 
 const RegisterScreen: React.FC = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+  const isRegistered = useAppSelector(state => state.userRegister.success);
+  console.log('isRegistered', isRegistered)
+  const isLoading = useAppSelector(state => state.userRegister.isLoading);
+
   const inputRef2 = React.useRef<TextInput>(null);
   const inputRef3 = React.useRef<TextInput>(null);
   const inputRef4 = React.useRef<TextInput>(null);
+  const inputRef5 = React.useRef<TextInput>(null);
 
-  const handleText = (text: string) => {
-    console.log(text);
+  const [formData, setFormData] = React.useState({
+    username: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    work_experience: '',
+  });
+
+  const [formError, setFormError] = React.useState({
+    username: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    work_experience: '',
+  });
+
+  const handleText = (type: string, text: string) => {
+    setFormData(prevData => ({
+      ...prevData,
+      [type]: text,
+    }));
   };
 
-  const registerUser = () => {};
+  const registerUser = async (formData: registerFormType) => {
+    let isError = false;
+    const isValidEmail = validateEmail(emailRegex, formData.email);
+    const fieldError = {
+      username: '',
+      email: '',
+      password: '',
+      confirm_password: '',
+      work_experience: '',
+    };
+
+    if (!formData.username.trim()) {
+      fieldError.username = 'Please enter a username';
+      isError = true;
+    }
+    if (!formData.email || !isValidEmail) {
+      fieldError.email = 'Please enter a email address';
+      isError = true;
+    }
+    if (!formData.password) {
+      fieldError.password = 'Please enter a valid Password';
+      isError = true;
+    }
+    if (formData.password !== formData.confirm_password) {
+      fieldError.confirm_password = 'Passwords do not match';
+      isError = true;
+    }
+    if (Number(formData.work_experience) <= 0) {
+      fieldError.work_experience = 'Work Experience is required';
+      isError = true;
+    }
+    setFormError(fieldError);
+    if (!isError) {
+      const registerFormData: FormData = new FormData();
+      registerFormData.append('username', formData.username);
+      registerFormData.append('email', formData.email);
+      registerFormData.append('password', formData.password);
+      registerFormData.append('work_experience', formData.work_experience);
+
+      await dispatch(registerUsers(registerFormData));
+    }
+  };
 
   const login = (navigate: string, navigation: any) => {
     navigation.navigate(navigate);
@@ -42,38 +117,57 @@ const RegisterScreen: React.FC = () => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={styles.form}>
           <InputField
-            getText={e => handleText(e)}
+            getText={e => handleText('username', e)}
+            placeholder="Enter your username"
+            placeholderTextColor={Colors.light}
+            keyboardType={'default'}
+            returnKeyType="next"
+            onSubmitEditing={() => inputRef2?.current?.focus()}
+            value={formData.username}
+            errorMessage={formError.username}
+          />
+          <InputField
+            getText={e => handleText('email', e)}
             placeholder="Email"
             placeholderTextColor={Colors.light}
             keyboardType={'email-address'}
             returnKeyType="next"
-            onSubmitEditing={() => inputRef2?.current?.focus()}
-          />
-          <InputField
-            getText={e => handleText(e)}
-            placeholder="Password"
-            placeholderTextColor={Colors.light}
-            keyboardType={'password'}
-            returnKeyType="next"
             onSubmitEditing={() => inputRef3?.current?.focus()}
             ref={inputRef2}
+            value={formData.email}
+            errorMessage={formError.email}
           />
           <InputField
-            getText={e => handleText(e)}
-            placeholder="Confirm Password"
+            getText={e => handleText('password', e)}
+            placeholder="Password"
             placeholderTextColor={Colors.light}
-            keyboardType={'password'}
+            keyboardType={'default'}
             returnKeyType="next"
             onSubmitEditing={() => inputRef4?.current?.focus()}
             ref={inputRef3}
+            value={formData.password}
+            errorMessage={formError.password}
           />
           <InputField
-            getText={e => handleText(e)}
-            placeholder="Enter your age"
+            getText={e => handleText('confirm_password', e)}
+            placeholder="Confirm Password"
+            placeholderTextColor={Colors.light}
+            keyboardType={'default'}
+            returnKeyType="next"
+            onSubmitEditing={() => inputRef5?.current?.focus()}
+            ref={inputRef4}
+            value={formData.confirm_password}
+            errorMessage={formError.confirm_password}
+          />
+          <InputField
+            getText={e => handleText('work_experience', e)}
+            placeholder="Enter your Work Experience"
             placeholderTextColor={Colors.light}
             keyboardType={'numeric'}
-            ref={inputRef4}
+            ref={inputRef5}
             returnKeyType="done"
+            value={formData.work_experience}
+            errorMessage={formError.work_experience.toString()}
           />
           <View style={styles.socialContainer} />
           <SocialAuth />
@@ -85,8 +179,9 @@ const RegisterScreen: React.FC = () => {
         </ScrollView>
         <ButtonComp
           title="Sign Up"
-          onPress={registerUser}
+          onPress={() => registerUser(formData)}
           backgroundColor={Colors.primary}
+          disabled={isLoading}
         />
       </>
     </Container>
