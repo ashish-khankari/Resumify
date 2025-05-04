@@ -168,7 +168,6 @@ const RegisterScreen: React.FC = () => {
             value={formData.work_experience}
             errorMessage={formError.work_experience.toString()}
           />
-          <View style={styles.socialContainer} />
           <SocialAuth />
           <Label
             onPress={() => login(APP_ROUTES.STACK.LOGIN, navigation)}

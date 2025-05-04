@@ -43,7 +43,4 @@ export const styles = StyleSheet.create({
     color: Colors.black,
     fontSize: size.medium,
   },
-  socialContainer: {
-    marginTop: verticalScale(80),
-  },
 });
