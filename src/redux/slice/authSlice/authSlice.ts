@@ -29,11 +29,15 @@ const initalState: registertype = {
 const authSlice = createSlice({
   name: 'auth',
   initialState: initalState,
-  reducers: {},
+  reducers: {
+    resetToast: (state) => {
+      state.success = false;
+      state.error = null;
+    }
+  },
   extraReducers: builder => {
     builder.addCase(registerUsers.pending, state => {
       state.isLoading = true;
-      state.success = false;
     }),
       builder.addCase(registerUsers.fulfilled, (state, action: PayloadAction<null>) => {
         state.isLoading = false;

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import {ScrollView, View, TextInput} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {ScrollView, TextInput} from 'react-native';
 import Container from '../../../components/Layouts/Container';
 import WelcomeTitle from '../../../components/molecules/WelcomeTitle/WelcomeTitle';
 import {Colors} from '../../../theme';
@@ -107,7 +106,6 @@ const RegisterScreen: React.FC = () => {
       registerFormData.append('email', formData.email);
       registerFormData.append('password', formData.password);
       registerFormData.append('work_experience', formData.work_experience);
-
       await dispatch(registerUsers(registerFormData));
     }
   };
@@ -192,7 +190,7 @@ const RegisterScreen: React.FC = () => {
         <ButtonComp
           title="Sign Up"
           onPress={() => registerUser(formData)}
-          backgroundColor={Colors.primary}
+          backgroundColor={isLoading ? Colors.lightGray : Colors.primary}
           disabled={isLoading}
         />
       </>
