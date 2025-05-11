@@ -15,7 +15,7 @@ const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
   const inputRef2 = React.useRef<TextInput>(null);
   const handleText = (text: string) => {
-    console.log(text);
+    console.log("text");
   };
 
   const logIn = (navigate: string, navigation: any) => {

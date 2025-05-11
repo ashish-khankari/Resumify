@@ -9,6 +9,7 @@ interface ButtonProps {
   buttonStyle?: any;
   textStyle?: any;
   backgroundColor?: string;
+  disabled?: boolean;
 }
 const ButtonComp: React.FC<ButtonProps> = ({
   title,
@@ -16,10 +17,12 @@ const ButtonComp: React.FC<ButtonProps> = ({
   buttonStyle,
   textStyle,
   backgroundColor,
+  disabled,
 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={disabled}
       style={[
         styles.buttonContainer,
         buttonStyle,

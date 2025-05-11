@@ -6,5 +6,6 @@ export const Colors = {
     light: '#626262',
     lightGray: 'lightgray',
     inputPrimary: '#F1F4FF',
-    socialIconColor: '#ECECEC'
+    socialIconColor: '#ECECEC',
+    errorMessage: '#FF0000'
 }
