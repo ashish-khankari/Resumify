@@ -9,4 +9,4 @@ const BookMarkScreen: React.FC = ({}) => {
     )
 }
 
-export default BookMarkScreen
+export default BookMarkScreen;
