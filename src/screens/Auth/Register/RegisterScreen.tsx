@@ -16,7 +16,7 @@ import {
   showToast,
   validateEmail,
 } from '../../../globalFunctions/globalFunction';
-import {registerUsers, resetToast} from '../../../redux/slice/authSlice/authSlice';
+import {registerUsers} from '../../../redux/slice/authSlice/authSlice';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 
 const RegisterScreen: React.FC = () => {
@@ -33,7 +33,7 @@ const RegisterScreen: React.FC = () => {
 
 
   useEffect(() => {
-    dispatch(resetToast());
+    // dispatch(resetToast());
     if (isRegistered) {
       showToast({type: 'success', message: 'You are successfully registered'});
     } else if (registerError) {
