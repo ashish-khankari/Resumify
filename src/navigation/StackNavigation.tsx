@@ -1,10 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {APP_ROUTES} from './routes';
-import LoginScreen from '../screens/Auth/Login/LoginScreen';
-import RegisterScreen from '../screens/Auth/Register/RegisterScreen';
-import WelcomeScreen from '../screens/Welcome/WelcomeScreen';
-import MyTabs from './BottomTabNavigation';
+import RegisterScreen from '../screens/Auth/Register';
+import WelcomeScreen from '../screens/Welcome';
 import DrawerNavigation from './DrawerNavigation';
+import LoginScreen from '../screens/Auth/Login';
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();

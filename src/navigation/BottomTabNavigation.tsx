@@ -1,12 +1,9 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/Home/HomeScreen';
-import ProfileScreen from '../screens/Profile/ProfileScreen';
 import {APP_ROUTES} from './routes';
 import React from 'react';
 import {Colors, Images} from '../theme';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {horizontalScale, verticalScale} from '../../Metrics';
-import NotificationsScreen from '../screens/Notification/NotificationScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +19,7 @@ const screenOptions = ({route}: {route: any}) => ({
     color: string;
     size: number;
   }) => {
-    let iconName
+    let iconName;
     let iconTintColor = focused ? Colors.primary : Colors.black;
     switch (route.name) {
       case APP_ROUTES.BOTTOM.HomeBottomTab:

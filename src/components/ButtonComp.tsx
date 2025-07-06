@@ -1,13 +1,20 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import React from 'react';
-import {Colors, FontFamily, size} from '../../../theme';
-import {moderateScale, verticalScale} from '../../../../Metrics';
+import {Colors, FontFamily, size} from '../theme';
+import {moderateScale, verticalScale} from '../../Metrics';
 
 interface ButtonProps {
   title: string;
   onPress: () => void;
-  buttonStyle?: any;
-  textStyle?: any;
+  buttonStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   backgroundColor?: string;
   disabled?: boolean;
 }
@@ -37,9 +44,9 @@ export default ButtonComp;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    borderRadius: moderateScale(8),
-    height: verticalScale(60),
-    width: '100%',
+    borderRadius: moderateScale(10),
+    // height: verticalScale(60),
+    paddingVertical: verticalScale(10),
     alignItems: 'center',
     justifyContent: 'center',
   },

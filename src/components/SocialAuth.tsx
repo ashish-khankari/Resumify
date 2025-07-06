@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Label from '../../atoms/Label/Label';
-import {Colors, FontFamily, Images, size} from '../../../theme';
-import SocialIcon from '../../atoms/SocialIcon/SocialIcon';
-import {moderateScale, verticalScale} from '../../../../Metrics';
+import {StyleSheet, View} from 'react-native';
+import Label from './Label';
+import {Colors, FontFamily, Images, size} from '../theme';
+import SocialIcon from './SocialIcon';
+import {verticalScale} from '../../Metrics';
 
-const SocialAuth: React.FC = ({}) => {
+const SocialAuth: React.FC = () => {
   return (
     <View style={styles.socialAuthContainer}>
       <Label title="Or continue with" labelStyle={styles.continueWithText} />
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   socialAuthContainer: {
     alignItems: 'center',
     gap: verticalScale(20),
+    marginTop: verticalScale(65),
   },
 });
 

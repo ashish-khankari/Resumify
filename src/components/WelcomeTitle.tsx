@@ -1,13 +1,13 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import Label from '../../atoms/Label/Label';
+import {StyleProp, TextStyle, View} from 'react-native';
+import Label from './Label';
 
 interface WelcomeTitleProps {
   title: string;
   title2: string;
-  titleStyle: any;
-  title2Style: any;
-  titleContainer?: any;
+  titleStyle: StyleProp<TextStyle>;
+  title2Style: StyleProp<TextStyle>;
+  titleContainer?: StyleProp<TextStyle>;
 }
 const WelcomeTitle: React.FC<WelcomeTitleProps> = ({
   title,
@@ -17,7 +17,7 @@ const WelcomeTitle: React.FC<WelcomeTitleProps> = ({
   titleContainer,
 }) => {
   return (
-    <View style={[titleContainer]}>
+    <View style={titleContainer}>
       <Label title={title} labelStyle={titleStyle} />
       <Label title={title2} labelStyle={title2Style} />
     </View>

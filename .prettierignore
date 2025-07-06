@@ -1,0 +1,8 @@
+node_modules/
+android/
+ios/
+build/
+coverage/
+.env/
+babel.config.js/
+metro.config.js/

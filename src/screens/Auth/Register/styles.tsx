@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {moderateScale, verticalScale} from '../../../../../Metrics';
-import {Colors, FontFamily, size} from '../../../../theme';
+import {moderateScale, verticalScale} from '../../../../Metrics';
+import {Colors, FontFamily, size} from '../../../theme';
 
 export const styles = StyleSheet.create({
   form: {
-    gap: verticalScale(40),
-    paddingTop: verticalScale(40),
+    gap: moderateScale(26),
+    paddingTop: verticalScale(53),
   },
   titleStyle: {
     fontSize: size.bold,
@@ -15,14 +15,14 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
   },
   title2Style: {
-    fontSize: size.semiBold_x,
+    fontSize: size.semiBold_small,
     color: Colors.black,
-    fontFamily: FontFamily.semiBold,
+    fontFamily: FontFamily.medium,
     textAlign: 'center',
+    paddingTop: verticalScale(6),
   },
   welcomeContainer: {
-    gap: moderateScale(20),
-    marginTop: verticalScale(30),
+    paddingTop: verticalScale(77),
   },
   formContainer: {
     gap: moderateScale(20),
@@ -41,8 +41,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.black,
     fontSize: size.medium,
-  },
-  socialContainer: {
-    marginTop: verticalScale(80),
+    // marginTop: verticalScale(30)
   },
 });

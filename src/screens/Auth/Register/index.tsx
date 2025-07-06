@@ -1,15 +1,9 @@
 import React, {useEffect} from 'react';
-import {ScrollView, TextInput} from 'react-native';
-import Container from '../../../components/Layouts/Container';
-import WelcomeTitle from '../../../components/molecules/WelcomeTitle/WelcomeTitle';
+import {ScrollView, TextInput, View} from 'react-native';
 import {Colors} from '../../../theme';
-import InputField from '../../../components/atoms/InputField/InputField';
-import Label from '../../../components/atoms/Label/Label';
-import ButtonComp from '../../../components/atoms/Button/ButtonComp';
-import SocialAuth from '../../../components/molecules/SocialAuth/SocialAuth';
 import {useNavigation} from '@react-navigation/native';
 import {APP_ROUTES} from '../../../navigation/routes';
-import {styles} from './Styles/RegisterScreenStyles';
+import {styles} from './styles';
 import {registerFormType} from '../../../globalFunctions/GlobalTypes';
 import {emailRegex} from '../../../globalFunctions/globalData';
 import {
@@ -18,6 +12,15 @@ import {
 } from '../../../globalFunctions/globalFunction';
 import {registerUsers} from '../../../redux/slice/authSlice/authSlice';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {verticalScale} from '../../../../Metrics';
+import {
+  ButtonComp,
+  Container,
+  InputField,
+  Label,
+  SocialAuth,
+  WelcomeTitle,
+} from '../../../components';
 
 const RegisterScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -29,8 +32,6 @@ const RegisterScreen: React.FC = () => {
   const inputRef2 = React.useRef<TextInput>(null);
   const inputRef3 = React.useRef<TextInput>(null);
   const inputRef4 = React.useRef<TextInput>(null);
-  const inputRef5 = React.useRef<TextInput>(null);
-
 
   useEffect(() => {
     // dispatch(resetToast());
@@ -42,7 +43,6 @@ const RegisterScreen: React.FC = () => {
         message: registerError || 'An unknown error occurred',
       });
     }
-
   }, [isRegistered, registerError, dispatch]);
 
   const [formData, setFormData] = React.useState({
@@ -123,77 +123,60 @@ const RegisterScreen: React.FC = () => {
         title2Style={styles.title2Style}
         titleContainer={styles.welcomeContainer}
       />
-      <>
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={styles.form}>
-          <InputField
-            getText={e => handleText('username', e)}
-            placeholder="Enter your username"
-            placeholderTextColor={Colors.light}
-            keyboardType={'default'}
-            returnKeyType="next"
-            onSubmitEditing={() => inputRef2?.current?.focus()}
-            value={formData.username}
-            errorMessage={formError.username}
-          />
-          <InputField
-            getText={e => handleText('email', e)}
-            placeholder="Email"
-            placeholderTextColor={Colors.light}
-            keyboardType={'email-address'}
-            returnKeyType="next"
-            onSubmitEditing={() => inputRef3?.current?.focus()}
-            ref={inputRef2}
-            value={formData.email}
-            errorMessage={formError.email}
-          />
-          <InputField
-            getText={e => handleText('password', e)}
-            placeholder="Password"
-            placeholderTextColor={Colors.light}
-            keyboardType={'default'}
-            returnKeyType="next"
-            onSubmitEditing={() => inputRef4?.current?.focus()}
-            ref={inputRef3}
-            value={formData.password}
-            errorMessage={formError.password}
-          />
-          <InputField
-            getText={e => handleText('confirm_password', e)}
-            placeholder="Confirm Password"
-            placeholderTextColor={Colors.light}
-            keyboardType={'default'}
-            returnKeyType="next"
-            onSubmitEditing={() => inputRef5?.current?.focus()}
-            ref={inputRef4}
-            value={formData.confirm_password}
-            errorMessage={formError.confirm_password}
-          />
-          <InputField
-            getText={e => handleText('work_experience', e)}
-            placeholder="Enter your Work Experience"
-            placeholderTextColor={Colors.light}
-            keyboardType={'numeric'}
-            ref={inputRef5}
-            returnKeyType="done"
-            value={formData.work_experience}
-            errorMessage={formError.work_experience.toString()}
-          />
-          <SocialAuth />
-          <Label
-            onPress={() => login(APP_ROUTES.STACK.LOGIN, navigation)}
-            title="Already have an account"
-            labelStyle={styles.createAccountStyle}
-          />
-        </ScrollView>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={styles.form}>
+        <InputField
+          getText={e => handleText('username', e)}
+          placeholder="Enter your username"
+          placeholderTextColor={Colors.light}
+          keyboardType={'default'}
+          returnKeyType="next"
+          onSubmitEditing={() => inputRef2?.current?.focus()}
+          value={formData.username}
+          errorMessage={formError.username}
+        />
+        <InputField
+          getText={e => handleText('email', e)}
+          placeholder="Email"
+          placeholderTextColor={Colors.light}
+          keyboardType={'email-address'}
+          returnKeyType="next"
+          onSubmitEditing={() => inputRef3?.current?.focus()}
+          ref={inputRef2}
+          value={formData.email}
+          errorMessage={formError.email}
+        />
+        <InputField
+          getText={e => handleText('password', e)}
+          placeholder="Password"
+          placeholderTextColor={Colors.light}
+          keyboardType={'default'}
+          returnKeyType="next"
+          onSubmitEditing={() => inputRef4?.current?.focus()}
+          ref={inputRef3}
+          value={formData.password}
+          errorMessage={formError.password}
+        />
         <ButtonComp
           title="Sign Up"
           onPress={() => registerUser(formData)}
           backgroundColor={isLoading ? Colors.lightGray : Colors.primary}
           disabled={isLoading}
+          buttonStyle={{marginTop: verticalScale(53)}}
         />
-      </>
+        <View
+          style={{
+            paddingVertical: verticalScale(10),
+          }}>
+          <Label
+            onPress={() => login(APP_ROUTES.STACK.LOGIN, navigation)}
+            title="Already have an account"
+            labelStyle={styles.createAccountStyle}
+          />
+        </View>
+        <SocialAuth />
+      </ScrollView>
     </Container>
   );
 };

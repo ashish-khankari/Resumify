@@ -16,7 +16,7 @@ export const registerUsers = createAsyncThunk(
     } catch (error: any) {
       return rejectWithValue(error.response.data.message);
     }
-  },
+  }
 );
 
 const initalState: registertype = {
@@ -35,11 +35,14 @@ const authSlice = createSlice({
       state.isLoading = true;
       state.success = false;
     }),
-      builder.addCase(registerUsers.fulfilled, (state, action: PayloadAction<null>) => {
-        state.isLoading = false;
-        state.success = true;
-        state.user = action.payload;
-      });
+      builder.addCase(
+        registerUsers.fulfilled,
+        (state, action: PayloadAction<null>) => {
+          state.isLoading = false;
+          state.success = true;
+          state.user = action.payload;
+        }
+      );
     builder.addCase(registerUsers.rejected, (state, action) => {
       state.isLoading = false;
       state.success = false;

@@ -1,3 +1,3 @@
 const formError = (message: string) => {
-    return message;
-}
+  return message;
+};

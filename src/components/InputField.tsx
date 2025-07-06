@@ -1,19 +1,27 @@
 import React, {forwardRef} from 'react';
-import {StyleSheet, TextInput, View, ReturnKeyTypeOptions, KeyboardType} from 'react-native';
-import {moderateScale, verticalScale} from '../../../../Metrics';
-import {Colors} from '../../../theme';
-import Label from '../Label/Label';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  ReturnKeyTypeOptions,
+  KeyboardType,
+  StyleProp,
+  TextStyle,
+} from 'react-native';
+import {moderateScale, verticalScale} from '../../Metrics';
+import {Colors} from '../theme';
+import Label from './Label';
 
 interface InputFieldProps {
+  value: string;
+  errorMessage?: string;
   placeholder: string;
-  getText: (text: string) => void;
   placeholderTextColor: string;
-  style?: any;
+  style?: StyleProp<TextStyle>;
   keyboardType?: KeyboardType;
-  returnKeyType?: ReturnKeyTypeOptions;
   onSubmitEditing?: () => void;
-  value: string,
-  errorMessage?: string
+  getText: (text: string) => void;
+  returnKeyType?: ReturnKeyTypeOptions;
 }
 
 const InputField = forwardRef<TextInput, InputFieldProps>(
@@ -29,7 +37,7 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
       value,
       errorMessage,
     },
-    ref,
+    ref
   ) => {
     return (
       <>
@@ -44,12 +52,12 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
           onSubmitEditing={onSubmitEditing}
           value={value?.toString()}
         />
-        {
-          errorMessage && <Label title={errorMessage} labelStyle={styles.errorLabelStyle} />
-        }
+        {errorMessage && (
+          <Label title={errorMessage} labelStyle={styles.errorLabelStyle} />
+        )}
       </>
     );
-  },
+  }
 );
 
 const styles = StyleSheet.create({
@@ -59,15 +67,15 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(10),
     paddingHorizontal: moderateScale(10),
     color: Colors.black,
-    height: verticalScale(60),
+    height: verticalScale(64),
     backgroundColor: Colors.inputPrimary,
   },
   errorLabelStyle: {
     color: Colors.errorMessage,
     fontSize: moderateScale(14),
     fontWeight: '400',
-    top: -verticalScale(10)
-  }
+    top: -verticalScale(10),
+  },
 });
 
 export default InputField;

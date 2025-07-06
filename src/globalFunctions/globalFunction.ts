@@ -6,5 +6,5 @@ export const showToast = ({message, type}: toastFunction) => {
 };
 
 export const validateEmail = (regExp: RegExp, email: string) => {
-    return regExp.test(email);
-}
+  return regExp.test(email);
+};

@@ -1,14 +1,15 @@
 import React, {ReactNode} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Colors} from '../../theme';
-import {horizontalScale, verticalScale} from '../../../Metrics';
-// import { Component } from "./Styles";
+import {SafeAreaView, StyleSheet} from 'react-native';
+
+import {Colors} from '../theme';
+import {horizontalScale} from '../../Metrics';
 
 interface ContainerProps {
   children: ReactNode;
 }
+
 const Container: React.FC<ContainerProps> = ({children}) => {
-  return <View style={styles.container}>{children}</View>;
+  return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
 };
 
 const styles = StyleSheet.create({
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
     paddingHorizontal: horizontalScale(20),
-    paddingBottom: verticalScale(20),
   },
 });
 
