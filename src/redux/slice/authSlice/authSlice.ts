@@ -1,29 +1,71 @@
 import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
-import {registertype} from '../../../globalFunctions/GlobalTypes';
+import {
+  LoginUserResponse,
+  RegisterFormType,
+  registertype,
+  RegisterUserResponse,
+  UserLogin,
+} from '../../../globalFunctions/GlobalTypes';
 import axios from 'axios';
-import {REGISTER_USER} from '../../../apiList';
+import {BASE_URL_DEV} from '../../../apiList';
 
 export const registerUsers = createAsyncThunk(
   'auth/registerUser',
-  async (data: FormData, {rejectWithValue}) => {
+  async (data: RegisterFormType, {rejectWithValue}) => {
     try {
-      const response = await axios.post(REGISTER_USER, data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      return response.data;
+      const response: RegisterUserResponse = await axios.post(
+        `${BASE_URL_DEV}/api/auth/register`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response;
     } catch (error: any) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(
+        error?.response?.data?.message || 'Something went wrong'
+      );
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  'auth/loginUser',
+  async (data: UserLogin, {rejectWithValue}) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL_DEV}/api/auth/login`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      return response.data as LoginUserResponse;
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || 'Something went wrong'
+      );
     }
   }
 );
 
 const initalState: registertype = {
-  user: null,
   isLoading: false,
   error: null,
   success: false,
+  user: {
+    res: {
+      _id: '',
+      username: '',
+      email: '',
+    },
+    token: '',
+  },
 };
 
 const authSlice = createSlice({
@@ -34,19 +76,38 @@ const authSlice = createSlice({
     builder.addCase(registerUsers.pending, state => {
       state.isLoading = true;
       state.success = false;
-    }),
-      builder.addCase(
-        registerUsers.fulfilled,
-        (state, action: PayloadAction<null>) => {
-          state.isLoading = false;
-          state.success = true;
-          state.user = action.payload;
-        }
-      );
+    });
+    builder.addCase(
+      registerUsers.fulfilled,
+      (state, action: PayloadAction<RegisterUserResponse | undefined>) => {
+        state.isLoading = false;
+        state.success = true;
+      }
+    );
     builder.addCase(registerUsers.rejected, (state, action) => {
       state.isLoading = false;
       state.success = false;
       state.error = action.payload as string | null;
+    });
+
+    // Login
+    builder.addCase(loginUser.pending, state => {
+      state.isLoading = true;
+      state.success = false;
+    });
+    builder.addCase(
+      loginUser.fulfilled,
+      (state, action: PayloadAction<LoginUserResponse>) => {
+        state.isLoading = false;
+        state.success = true;
+        const {res, token} = action.payload;
+        state.user = {res, token};
+      }
+    );
+
+    builder.addCase(loginUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.success = false;
     });
   },
 });

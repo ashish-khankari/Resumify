@@ -13,21 +13,57 @@ import {
   SocialAuth,
   WelcomeTitle,
 } from '../../../components';
+import {Controller, useForm} from 'react-hook-form';
+import {UserLogin} from '../../../globalFunctions/GlobalTypes';
+import {emailRegex} from '../../../globalFunctions/globalData';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {loginUser} from '../../../redux/slice/authSlice/authSlice';
+import {showToast} from '../../../globalFunctions/globalFunction';
 
 const LoginScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
+  const dispatch = useAppDispatch();
+
   const inputRef2 = React.useRef<TextInput>(null);
-
-  const handleText = (text: string) => {
-    console.log('text');
-  };
-
-  const logIn = (navigate: string, navigation: any) => {
-    navigation.navigate(navigate);
-  };
-
   const toRegister = (navigate: string, navigation: any) => {
     navigation.navigate(navigate);
+  };
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+    reset
+  } = useForm({
+    mode: 'all',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = async (data: UserLogin) => {
+    const loginData = {
+      email: data.email,
+      password: data.password,
+    };
+    try {
+      const res = await dispatch(loginUser(loginData)).unwrap();
+      if (res.status === 200) {
+        navigation.navigate(APP_ROUTES.STACK.HOME);
+        reset();
+        showToast({
+          message: res.message,
+          type: 'success',
+        });
+      }
+    } catch (error: any) {
+      reset();
+      showToast({
+        message: error,
+        type: 'error',
+      });
+    }
   };
 
   return (
@@ -44,29 +80,61 @@ const LoginScreen: React.FC = () => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={styles.form}>
           <View style={styles.formContainer}>
-            <InputField
-              getText={e => handleText(e)}
-              placeholder="Email"
-              placeholderTextColor={Colors.light}
-              keyboardType={'email-address'}
-              returnKeyType="next"
-              onSubmitEditing={() => inputRef2.current?.focus()}
+            <Controller
+              control={control}
+              rules={{
+                required: 'Please enter a email',
+                pattern: {
+                  value: emailRegex,
+                  message: 'Please enter a valid email address',
+                },
+              }}
+              render={({field: {onChange, onBlur, value}}) => (
+                <InputField
+                  getText={onChange}
+                  placeholder="Email"
+                  placeholderTextColor={Colors.light}
+                  keyboardType={'email-address'}
+                  returnKeyType="next"
+                  onSubmitEditing={() => inputRef2.current?.focus()}
+                  onBlur={onBlur}
+                  value={value}
+                  errorMessage={errors.email?.message}
+                />
+              )}
+              name="email"
             />
-            <InputField
-              getText={e => handleText(e)}
-              placeholder="Password"
-              placeholderTextColor={Colors.light}
-              keyboardType={'default'}
-              returnKeyType="done"
-              onSubmitEditing={() => inputRef2.current?.focus()}
-              ref={inputRef2}
+            <Controller
+              control={control}
+              rules={{
+                required: 'Please enter a password',
+                minLength: {
+                  value: 6,
+                  message: 'Password must be alteast 6 characters',
+                },
+              }}
+              render={({field: {onChange, onBlur, value}}) => (
+                <InputField
+                  getText={onChange}
+                  placeholder="Password"
+                  placeholderTextColor={Colors.light}
+                  keyboardType={'default'}
+                  returnKeyType="done"
+                  onSubmitEditing={() => inputRef2.current?.focus()}
+                  ref={inputRef2}
+                  value={value}
+                  onBlur={onBlur}
+                  errorMessage={errors.password?.message}
+                />
+              )}
+              name="password"
             />
           </View>
           <Label title="Forgot Your Password" labelStyle={styles.labelStyle} />
 
           <ButtonComp
             title="Sign in"
-            onPress={() => logIn(APP_ROUTES.STACK.HOME, navigation)}
+            onPress={handleSubmit(onSubmit)}
             backgroundColor={Colors.primary}
             buttonStyle={{marginTop: verticalScale(30)}}
           />

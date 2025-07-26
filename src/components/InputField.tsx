@@ -2,26 +2,27 @@ import React, {forwardRef} from 'react';
 import {
   StyleSheet,
   TextInput,
-  View,
   ReturnKeyTypeOptions,
   KeyboardType,
   StyleProp,
   TextStyle,
+  View,
 } from 'react-native';
 import {moderateScale, verticalScale} from '../../Metrics';
-import {Colors} from '../theme';
+import {Colors, FontFamily} from '../theme';
 import Label from './Label';
 
 interface InputFieldProps {
   value: string;
-  errorMessage?: string;
+  errorMessage?: string | undefined;
   placeholder: string;
   placeholderTextColor: string;
   style?: StyleProp<TextStyle>;
   keyboardType?: KeyboardType;
   onSubmitEditing?: () => void;
-  getText: (text: string) => void;
   returnKeyType?: ReturnKeyTypeOptions;
+  getText: (text: string) => void;
+  onBlur: () => void;
 }
 
 const InputField = forwardRef<TextInput, InputFieldProps>(
@@ -36,11 +37,12 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
       onSubmitEditing,
       value,
       errorMessage,
+      onBlur,
     },
     ref
   ) => {
     return (
-      <>
+      <View style={styles.container}>
         <TextInput
           ref={ref}
           placeholder={placeholder}
@@ -51,16 +53,20 @@ const InputField = forwardRef<TextInput, InputFieldProps>(
           returnKeyType={returnKeyType}
           onSubmitEditing={onSubmitEditing}
           value={value?.toString()}
+          onBlur={onBlur}
         />
         {errorMessage && (
           <Label title={errorMessage} labelStyle={styles.errorLabelStyle} />
         )}
-      </>
+      </View>
     );
   }
 );
 
 const styles = StyleSheet.create({
+  container: {
+    gap: moderateScale(4),
+  },
   inputContainer: {
     borderColor: Colors.lightGray,
     borderWidth: 1,
@@ -73,8 +79,7 @@ const styles = StyleSheet.create({
   errorLabelStyle: {
     color: Colors.errorMessage,
     fontSize: moderateScale(14),
-    fontWeight: '400',
-    top: -verticalScale(10),
+    fontFamily: FontFamily.regular,
   },
 });
 

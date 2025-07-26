@@ -1,2 +1,1 @@
-export const REGISTER_USER: string = `https://resumify-backend-n1jr.onrender.com/api/auth/register`;
-// export const LOGIN_USER: string = `${BASE_URL}auth/login`;
+export const BASE_URL_DEV = 'https://2185658a098d.ngrok-free.app';
