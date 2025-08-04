@@ -54,6 +54,21 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async (_, {rejectWithValue}) => {
+    try {
+      // You can add API call to logout on server if needed
+      // await axios.post(`${BASE_URL_DEV}/api/auth/logout`);
+      return true;
+    } catch (error: any) {
+      return rejectWithValue(
+        error?.response?.data?.message || 'Something went wrong'
+      );
+    }
+  }
+);
+
 const initalState: registertype = {
   isLoading: false,
   error: null,
@@ -71,7 +86,20 @@ const initalState: registertype = {
 const authSlice = createSlice({
   name: 'auth',
   initialState: initalState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = {
+        res: {
+          _id: '',
+          username: '',
+          email: '',
+        },
+        token: '',
+      };
+      state.success = false;
+      state.error = null;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(registerUsers.pending, state => {
       state.isLoading = true;
@@ -109,7 +137,29 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.success = false;
     });
+
+    // Logout
+    builder.addCase(logoutUser.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(logoutUser.fulfilled, state => {
+      state.isLoading = false;
+      state.user = {
+        res: {
+          _id: '',
+          username: '',
+          email: '',
+        },
+        token: '',
+      };
+      state.success = false;
+      state.error = null;
+    });
+    builder.addCase(logoutUser.rejected, (state, action) => {
+      state.isLoading = false;
+    });
   },
 });
 
 export default authSlice.reducer;
+export const {logout} = authSlice.actions;

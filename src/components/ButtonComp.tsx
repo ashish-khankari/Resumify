@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import React from 'react';
-import {Colors, FontFamily, size} from '../theme';
+import {colors, fontFamily, size} from '../theme';
 import {moderateScale, verticalScale} from '../../Metrics';
 
 interface ButtonProps {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: size.semiBold_x,
-    fontFamily: FontFamily.semiBold,
-    color: Colors.white,
+    fontFamily: fontFamily.semiBold,
+    color: colors.white,
   },
 });

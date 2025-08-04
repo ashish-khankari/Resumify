@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {Colors, FontFamily, size} from '../../../theme';
+import { colors, fontFamily, size} from '../../../theme';
 import {moderateScale, verticalScale} from '../../../../Metrics';
 
 export const styles = StyleSheet.create({
@@ -9,15 +9,15 @@ export const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: size.bold,
-    color: Colors.primary,
-    fontFamily: FontFamily.regular,
+    color: colors.primary,
+    fontFamily: fontFamily.regular,
     textAlign: 'center',
     fontWeight: '700',
   },
   title2Style: {
     fontSize: size.semiBold_x,
-    color: Colors.black,
-    fontFamily: FontFamily.semiBold,
+    color: colors.black,
+    fontFamily: fontFamily.semiBold,
     textAlign: 'center',
   },
   welcomeContainer: {
@@ -29,18 +29,18 @@ export const styles = StyleSheet.create({
   },
   fieldStyle: {
     borderWidth: 0.5,
-    borderColor: Colors.primary,
+    borderColor: colors.primary,
   },
   labelStyle: {
     fontSize: size.semiBold_small,
-    fontFamily: FontFamily.semiBold,
-    color: Colors.primary,
+    fontFamily: fontFamily.semiBold,
+    color: colors.primary,
     textAlign: 'right',
     marginTop: verticalScale(30),
   },
   createAccountStyle: {
     textAlign: 'center',
-    color: Colors.black,
+    color: colors.black,
     fontSize: size.medium,
     marginTop: verticalScale(40),
   },

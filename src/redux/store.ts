@@ -1,7 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from "redux-persist";
-import authReducer from '../redux/slice/authSlice/authSlice';
+import { persistReducer } from "redux-persist";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import authReducer from './slice/authSlice/authSlice'
+import persistStore from 'redux-persist/es/persistStore';
 
 const persistConfig = {
   key: "auth",
@@ -21,5 +22,6 @@ export const store = configureStore({
 
 });
 
+export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Container from '../components/Container'
+import JobPostCard from '../components/JobPost'
 
 const HomeScreen: React.FC = () => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <Container>
+      <JobPostCard />
+    </Container>
   )
 }
 

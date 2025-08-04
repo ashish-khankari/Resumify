@@ -16,7 +16,7 @@ import {styles} from './styles';
 import {Colors} from '../../../theme';
 import {verticalScale} from '../../../../Metrics';
 import {APP_ROUTES} from '../../../navigation/routes';
-import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks/useRedux';
 import {emailRegex} from '../../../globalFunctions/globalData';
 import {RegisterFormType} from '../../../globalFunctions/GlobalTypes';
 import {registerUsers} from '../../../redux/slice/authSlice/authSlice';

@@ -5,6 +5,7 @@ import {Colors, Images} from '../theme';
 import {Image, StyleSheet} from 'react-native';
 import {horizontalScale, verticalScale} from '../../Metrics';
 import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -64,8 +65,8 @@ const MyTabs = () => {
       <Tab.Screen
         name={APP_ROUTES.BOTTOM.NOTIFICATION}
         component={NotificationsScreen}
-      />
-      <Tab.Screen name={APP_ROUTES.BOTTOM.PROFILE} component={ProfileScreen} /> */}
+      /> */}
+      <Tab.Screen name={APP_ROUTES.BOTTOM.PROFILE} component={ProfileScreen} />
     </Tab.Navigator>
   );
 };

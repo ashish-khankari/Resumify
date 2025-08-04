@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Label from './Label';
-import {Colors, FontFamily, Images, size} from '../theme';
+import {colors, fontFamily, images, size} from '../theme';
 import SocialIcon from './SocialIcon';
 import {verticalScale} from '../../Metrics';
 
@@ -10,9 +10,9 @@ const SocialAuth: React.FC = () => {
     <View style={styles.socialAuthContainer}>
       <Label title="Or continue with" labelStyle={styles.continueWithText} />
       <SocialIcon
-        socialIcon={Images.Apple}
-        socialIcon1={Images.Facebook}
-        socialIcon2={Images.Google}
+        socialIcon={images.Apple}
+        socialIcon1={images.Facebook}
+        socialIcon2={images.Google}
       />
     </View>
   );
@@ -20,8 +20,8 @@ const SocialAuth: React.FC = () => {
 
 const styles = StyleSheet.create({
   continueWithText: {
-    color: Colors.primary,
-    fontFamily: FontFamily.semiBold,
+    color: colors.primary,
+    fontFamily: fontFamily.semiBold,
     fontSize: size.semiBold_small,
   },
   socialAuthContainer: {

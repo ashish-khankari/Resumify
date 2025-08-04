@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import {moderateScale, verticalScale} from '../../Metrics';
-import {Colors, FontFamily} from '../theme';
+import { colors, fontFamily } from '../theme';
 import Label from './Label';
 
 interface InputFieldProps {
@@ -68,18 +68,18 @@ const styles = StyleSheet.create({
     gap: moderateScale(4),
   },
   inputContainer: {
-    borderColor: Colors.lightGray,
+    borderColor: colors.lightGray,
     borderWidth: 1,
     borderRadius: moderateScale(10),
     paddingHorizontal: moderateScale(10),
-    color: Colors.black,
+    color: colors.black,
     height: verticalScale(64),
-    backgroundColor: Colors.inputPrimary,
+    backgroundColor: colors.inputPrimary,
   },
   errorLabelStyle: {
-    color: Colors.errorMessage,
+    color: colors.errorMessage,
     fontSize: moderateScale(14),
-    fontFamily: FontFamily.regular,
+    fontFamily: fontFamily.regular,
   },
 });
 

@@ -8,11 +8,11 @@ const size = {
   semiBold_small: moderateScale(14),
 };
 
-const FontFamily = {
+const fontFamily = {
   bold: 'Poppins-Bold',
   semiBold: 'Poppins-SemiBold',
   medium: 'Poppins-Medium',
   regular: 'Poppins-Regular',
 };
 
-export {size, FontFamily};
+export {size, fontFamily};

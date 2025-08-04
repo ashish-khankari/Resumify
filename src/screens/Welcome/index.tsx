@@ -1,12 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
-import {Colors, FontFamily, Images, size} from '../../theme';
+import {colors, fontFamily, images, size} from '../../theme';
 import WelcomeTitle from '../../components/WelcomeTitle';
 import ButtonComp from '../../components/ButtonComp';
 import {moderateScale, verticalScale} from '../../../Metrics';
 import {useNavigation} from '@react-navigation/native';
 import {APP_ROUTES} from '../../navigation/routes';
-import {Container} from '../../components';
+import Container from '../../components/Container';
 
 const WelcomeScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -23,7 +23,7 @@ const WelcomeScreen: React.FC = () => {
     <Container>
       <View style={styles.welcomeContainer}>
         <View style={styles.imageContainer}>
-          <Image source={Images.WorkFromHome} style={styles.workImage} />
+          <Image source={images.WorkFromHome} style={styles.workImage} />
         </View>
         <WelcomeTitle
           title="Discover Your Dream Job Here"
@@ -37,7 +37,7 @@ const WelcomeScreen: React.FC = () => {
           title={'Login'}
           onPress={() => Login(APP_ROUTES.STACK.LOGIN, navigation)}
           buttonStyle={styles.loginButton}
-          backgroundColor={Colors.primary}
+          backgroundColor={colors.primary}
           textStyle={styles.loginText}
         />
         <ButtonComp
@@ -45,7 +45,7 @@ const WelcomeScreen: React.FC = () => {
           onPress={() => Register(APP_ROUTES.STACK.REGISTER, navigation)}
           buttonStyle={styles.registerButton}
           textStyle={styles.textStyle}
-          backgroundColor={Colors.white}
+          backgroundColor={colors.white}
         />
       </View>
     </Container>
@@ -65,15 +65,15 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: size.semiBold,
-    color: Colors.primary,
-    fontFamily: FontFamily.regular,
+    color: colors.primary,
+    fontFamily: fontFamily.regular,
     textAlign: 'center',
     marginTop: verticalScale(47),
   },
   title2Style: {
     fontSize: size.semiBold_small,
-    color: Colors.black,
-    fontFamily: FontFamily.regular,
+    color: colors.black,
+    fontFamily: fontFamily.regular,
     textAlign: 'center',
     marginTop: verticalScale(23),
   },
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: size.medium,
-    fontFamily: FontFamily.semiBold,
-    color: Colors.black,
+    fontFamily: fontFamily.semiBold,
+    color: colors.black,
   },
   buttonContianer: {
     flexDirection: 'row',
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     fontSize: size.medium,
-    fontFamily: FontFamily.semiBold,
-    color: Colors.white,
+    fontFamily: fontFamily.semiBold,
+    color: colors.white,
   },
 });
 

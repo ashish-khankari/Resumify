@@ -16,7 +16,7 @@ import {
 import {Controller, useForm} from 'react-hook-form';
 import {UserLogin} from '../../../globalFunctions/GlobalTypes';
 import {emailRegex} from '../../../globalFunctions/globalData';
-import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks/useRedux';
 import {loginUser} from '../../../redux/slice/authSlice/authSlice';
 import {showToast} from '../../../globalFunctions/globalFunction';
 
@@ -49,6 +49,7 @@ const LoginScreen: React.FC = () => {
     };
     try {
       const res = await dispatch(loginUser(loginData)).unwrap();
+      console.log('res', res)
       if (res.status === 200) {
         navigation.navigate(APP_ROUTES.STACK.HOME);
         reset();
@@ -58,6 +59,7 @@ const LoginScreen: React.FC = () => {
         });
       }
     } catch (error: any) {
+      console.log('error', error)
       reset();
       showToast({
         message: error,

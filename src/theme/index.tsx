@@ -1,5 +1,5 @@
-import Images from './Images';
-import {size, FontFamily} from './Fonts';
-import {Colors} from './Colors';
+import images from './images';
+import {size, fontFamily} from './fonts';
+import {colors} from './colors';
 
-export {Images, size, FontFamily, Colors};
+export {images, size, fontFamily, colors};
