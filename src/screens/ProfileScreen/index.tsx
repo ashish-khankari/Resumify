@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {Colors} from '../../theme';
+import {View, StyleSheet, Text} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../hooks/useRedux';
 import {logoutUser} from '../../redux/slice/authSlice/authSlice';
 import {useNavigation} from '@react-navigation/native';
 import {APP_ROUTES} from '../../navigation/routes';
 import ButtonComp from '../../components/ButtonComp';
 import {Container} from '../../components';
+import {colors} from '../../theme';
 
 const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -42,7 +42,7 @@ const ProfileScreen: React.FC = () => {
             title="Logout"
             onPress={handleLogout}
             buttonStyle={styles.logoutButton}
-            backgroundColor={Colors.primary}
+            backgroundColor={colors.primary}
             textStyle={styles.logoutText}
           />
         </View>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: Colors.black,
+    color: colors.black,
     marginBottom: 30,
     textAlign: 'center',
   },
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
@@ -87,11 +87,11 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: '600',
-    color: Colors.black,
+    color: colors.black,
   },
   value: {
     fontSize: 16,
-    color: Colors.primary,
+    color: colors.primary,
   },
   logoutSection: {
     marginBottom: 30,

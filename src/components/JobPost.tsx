@@ -2,68 +2,64 @@ import React from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {horizontalScale, verticalScale, moderateScale} from '../../Metrics';
 import {colors, fontFamily, images} from '../theme';
+import ImagIconRow from './ImagIconRow';
 
 const JobPostCard = () => {
   return (
-    <View style={styles.cardContainer}>
-      <TouchableOpacity style={styles.bookmark}>
-        <Image source={images.bookmarkSaved} style={styles.bookmarkIcon} />
-      </TouchableOpacity>
+    <View style={styles.outerContainer}>
+      <View style={styles.cardContainer}>
+        <TouchableOpacity style={styles.bookmark}>
+          <Image source={images.bookmarkSaved} style={styles.bookmarkIcon} />
+        </TouchableOpacity>
 
-      <View style={styles.row}>
-        <Image source={images.JobCardProfile} style={styles.profileImage} />
-        <View style={styles.infoSection}>
-          <Text style={styles.jobTitle}>Product Manager</Text>
-          <Text style={styles.name}>Michael Chen</Text>
+        <View style={styles.row}>
+          <Image source={images.JobCardProfile} style={styles.profileImage} />
+          <View style={styles.infoSection}>
+            <Text style={styles.jobTitle}>Product Manager</Text>
+            <Text style={styles.name}>Michael Chen</Text>
 
-          {/* Location & Experience */}
-          <View style={{marginTop: verticalScale(8)}}>
-            <View style={styles.iconTextRow}>
-              <View style={styles.imageContainer}>
-                <Image source={images.location} style={styles.icon} tintColor={colors.purple} />
-              </View>
-              <Text style={styles.iconText}>New York, NY</Text>
-            </View>
-            <View style={styles.iconTextRow}>
-              <Image source={images.work} style={styles.icon} />
-              <Text style={styles.iconText}>8+ years experience</Text>
-            </View>
+            <>
+              <ImagIconRow icon={images.location} text='New york' iconBackgroundColor='#ded3e6' iconColor={colors.purple} />
 
-            {/* Email */}
-            <View style={styles.iconTextRow}>
-              <Image source={images.mail} style={styles.icon} />
-              <Text style={styles.iconText}>michael.chen@email.com</Text>
-            </View>
+              <ImagIconRow icon={images.work} text='8+ years experience'  iconColor={colors.lightGray} />
+
+              <ImagIconRow icon={images.mail} text='michael.chen@email.com' />
+            </>
           </View>
         </View>
-      </View>
 
-      <Text style={styles.description}>
-        Seeking product management roles in B2B SaaS companies. Strong
-        background in agile development, user research, and data-driven decision
-        making. Led teams of 10+ engineers.
-      </Text>
+        <Text style={styles.description}>
+          Seeking product management roles in B2B SaaS companies. Strong
+          background in agile development, user research, and data-driven
+          decision making. Led teams of 10+ engineers.
+        </Text>
 
-      <View style={styles.footerRow}>
-        <View style={styles.tagRow}>
-          <Text style={styles.tagPurple}>Product Management</Text>
-          <Text style={styles.tagOrange}>Full-time</Text>
+        <View style={styles.footerRow}>
+          <View style={styles.tagRow}>
+            <Text style={styles.tagPurple}>Product Management</Text>
+            <Text style={styles.tagOrange}>Full-time</Text>
+          </View>
+          <TouchableOpacity style={styles.pdfLink}>
+            <Image source={images.document} style={styles.pdfIcon} />
+            <Text style={styles.pdfText}>View PDF</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.pdfLink}>
-          <Image source={images.document} style={styles.pdfIcon} />
-          <Text style={styles.pdfText}>View PDF</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    padding: moderateScale(4),
+    overflow: 'hidden',
+    borderRadius: moderateScale(20),
+    backgroundColor: '#f5f3eb',
+  },
   cardContainer: {
     backgroundColor: colors.white,
-    borderRadius: horizontalScale(12),
     padding: horizontalScale(16),
-    marginVertical: verticalScale(10),
+    borderRadius: moderateScale(20),
     elevation: 4,
   },
   bookmark: {
@@ -110,18 +106,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: moderateScale(10),
-    // marginRight: horizontalScale(6),
-    backgroundColor: '#ded3e6'
+    backgroundColor: '#ded3e6',
   },
   icon: {
     width: horizontalScale(20),
     height: verticalScale(20),
-    // marginRight: horizontalScale(6),
-  },
-  iconText: {
-    fontSize: horizontalScale(13),
-    color: colors.light,
-    fontFamily: fontFamily.regular,
   },
   description: {
     fontSize: horizontalScale(14),

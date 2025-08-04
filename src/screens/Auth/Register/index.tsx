@@ -4,16 +4,7 @@ import {ScrollView, TextInput, View} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
 
-import {
-  ButtonComp,
-  Container,
-  InputField,
-  Label,
-  SocialAuth,
-  WelcomeTitle,
-} from '../../../components';
 import {styles} from './styles';
-import {Colors} from '../../../theme';
 import {verticalScale} from '../../../../Metrics';
 import {APP_ROUTES} from '../../../navigation/routes';
 import {useAppDispatch, useAppSelector} from '../../../hooks/useRedux';
@@ -21,6 +12,15 @@ import {emailRegex} from '../../../globalFunctions/globalData';
 import {RegisterFormType} from '../../../globalFunctions/GlobalTypes';
 import {registerUsers} from '../../../redux/slice/authSlice/authSlice';
 import {errorStatus, showToast} from '../../../globalFunctions/globalFunction';
+import {
+  Label,
+  Container,
+  ButtonComp,
+  InputField,
+  SocialAuth,
+  WelcomeTitle,
+} from '../../../components';
+import {colors} from '../../../theme';
 
 const RegisterScreen: React.FC = () => {
   const navigation = useNavigation<any>();
@@ -85,7 +85,7 @@ const RegisterScreen: React.FC = () => {
             <InputField
               getText={onChange}
               placeholder="Enter your username"
-              placeholderTextColor={Colors.light}
+              placeholderTextColor={colors.light}
               keyboardType={'default'}
               returnKeyType="next"
               onSubmitEditing={() => inputRef2?.current?.focus()}
@@ -103,7 +103,7 @@ const RegisterScreen: React.FC = () => {
             <InputField
               getText={onChange}
               placeholder="Enter your email"
-              placeholderTextColor={Colors.light}
+              placeholderTextColor={colors.light}
               keyboardType={'default'}
               returnKeyType="next"
               onSubmitEditing={() => inputRef3?.current?.focus()}
@@ -128,7 +128,7 @@ const RegisterScreen: React.FC = () => {
             <InputField
               getText={onChange}
               placeholder="Enter your passeord"
-              placeholderTextColor={Colors.light}
+              placeholderTextColor={colors.light}
               keyboardType={'default'}
               returnKeyType="next"
               onSubmitEditing={handleSubmit(registerUser)}
@@ -149,7 +149,7 @@ const RegisterScreen: React.FC = () => {
         <ButtonComp
           title="Sign Up"
           onPress={handleSubmit(registerUser)}
-          backgroundColor={isLoading ? Colors.lightGray : Colors.primary}
+          backgroundColor={isLoading ? colors.lightGray : colors.primary}
           disabled={isLoading}
           buttonStyle={{marginTop: verticalScale(53)}}
         />

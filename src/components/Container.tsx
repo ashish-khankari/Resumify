@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 
-import {Colors} from '../theme';
+import {colors} from '../theme';
 import {horizontalScale} from '../../Metrics';
 
 interface ContainerProps {
@@ -15,7 +15,7 @@ const Container: React.FC<ContainerProps> = ({children}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     paddingHorizontal: horizontalScale(20),
   },
 });

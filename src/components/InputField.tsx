@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import {moderateScale, verticalScale} from '../../Metrics';
-import { colors, fontFamily } from '../theme';
+import {colors, fontFamily} from '../theme';
 import Label from './Label';
 
 interface InputFieldProps {

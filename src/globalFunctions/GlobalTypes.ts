@@ -1,4 +1,4 @@
-import { ToastType } from "react-native-toast-message";
+import {ToastType} from 'react-native-toast-message';
 
 export interface registertype {
   isLoading: boolean;

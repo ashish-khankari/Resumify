@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import { colors, fontFamily, size} from '../../../theme';
+import {colors, fontFamily, size} from '../../../theme';
 import {moderateScale, verticalScale} from '../../../../Metrics';
 
 export const styles = StyleSheet.create({

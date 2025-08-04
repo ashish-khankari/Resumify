@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, ImageSourcePropType, StyleSheet, View} from 'react-native';
-import {Colors} from '../theme';
 import {horizontalScale, moderateScale, verticalScale} from '../../Metrics';
+import {colors} from '../theme';
 
 interface SocialIconProps {
   socialIcon: ImageSourcePropType;
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   socialIconContainer: {
     height: verticalScale(40),
     width: horizontalScale(60),
-    backgroundColor: Colors.socialIconColor,
+    backgroundColor: colors.socialIconColor,
     borderRadius: moderateScale(12),
     justifyContent: 'center',
     alignItems: 'center',

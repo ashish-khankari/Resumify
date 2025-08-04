@@ -87,7 +87,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: initalState,
   reducers: {
-    logout: (state) => {
+    logout: state => {
       state.user = {
         res: {
           _id: '',

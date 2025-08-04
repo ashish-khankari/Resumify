@@ -5,6 +5,8 @@ import Container from './Container';
 import ButtonComp from './ButtonComp';
 import InputField from './InputField';
 import WelcomeTitle from './WelcomeTitle';
+import JobPostCard from './JobPost';
+import ImagIconRow from './ImagIconRow';
 
 export {
   ButtonComp,
@@ -14,4 +16,6 @@ export {
   SocialAuth,
   SocialIcon,
   WelcomeTitle,
+  JobPostCard,
+  ImagIconRow
 };

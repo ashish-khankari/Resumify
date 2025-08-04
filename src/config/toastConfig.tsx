@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {BaseToastProps} from 'react-native-toast-message';
 import {verticalScale} from '../../Metrics';
+import {colors} from '../theme';
 
 interface CustomToastProps extends BaseToastProps {
   text1?: string;
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     color: '#027A48',
   },
   text2: {
-    color: 'white',
+    color: colors.white,
   },
 });
 

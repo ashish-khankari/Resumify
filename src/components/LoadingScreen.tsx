@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, ActivityIndicator, StyleSheet} from 'react-native';
-import {Colors} from '../theme';
+import {colors} from '../theme';
 
 const LoadingScreen: React.FC = () => {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={Colors.primary} />
+      <ActivityIndicator size="large" color={colors.primary} />
     </View>
   );
 };
@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
   },
 });
 
-export default LoadingScreen; 
+export default LoadingScreen;

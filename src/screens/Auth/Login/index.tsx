@@ -1,24 +1,22 @@
 import React from 'react';
 import {ScrollView, TextInput, View} from 'react-native';
-import {Colors} from '../../../theme';
 import {APP_ROUTES} from '../../../navigation/routes';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './styles';
 import {verticalScale} from '../../../../Metrics';
-import {
-  Label,
-  Container,
-  ButtonComp,
-  InputField,
-  SocialAuth,
-  WelcomeTitle,
-} from '../../../components';
 import {Controller, useForm} from 'react-hook-form';
 import {UserLogin} from '../../../globalFunctions/GlobalTypes';
 import {emailRegex} from '../../../globalFunctions/globalData';
-import {useAppDispatch, useAppSelector} from '../../../hooks/useRedux';
+import {useAppDispatch} from '../../../hooks/useRedux';
 import {loginUser} from '../../../redux/slice/authSlice/authSlice';
 import {showToast} from '../../../globalFunctions/globalFunction';
+import Container from '../../../components/Container';
+import WelcomeTitle from '../../../components/WelcomeTitle';
+import InputField from '../../../components/InputField';
+import {colors} from '../../../theme';
+import Label from '../../../components/Label';
+import ButtonComp from '../../../components/ButtonComp';
+import SocialAuth from '../../../components/SocialAuth';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<any>();
@@ -33,7 +31,7 @@ const LoginScreen: React.FC = () => {
     control,
     handleSubmit,
     formState: {errors},
-    reset
+    reset,
   } = useForm({
     mode: 'all',
     defaultValues: {
@@ -49,7 +47,7 @@ const LoginScreen: React.FC = () => {
     };
     try {
       const res = await dispatch(loginUser(loginData)).unwrap();
-      console.log('res', res)
+      console.log('res', res);
       if (res.status === 200) {
         navigation.navigate(APP_ROUTES.STACK.HOME);
         reset();
@@ -59,7 +57,7 @@ const LoginScreen: React.FC = () => {
         });
       }
     } catch (error: any) {
-      console.log('error', error)
+      console.log('error', error);
       reset();
       showToast({
         message: error,
@@ -95,7 +93,7 @@ const LoginScreen: React.FC = () => {
                 <InputField
                   getText={onChange}
                   placeholder="Email"
-                  placeholderTextColor={Colors.light}
+                  placeholderTextColor={colors.light}
                   keyboardType={'email-address'}
                   returnKeyType="next"
                   onSubmitEditing={() => inputRef2.current?.focus()}
@@ -119,7 +117,7 @@ const LoginScreen: React.FC = () => {
                 <InputField
                   getText={onChange}
                   placeholder="Password"
-                  placeholderTextColor={Colors.light}
+                  placeholderTextColor={colors.light}
                   keyboardType={'default'}
                   returnKeyType="done"
                   onSubmitEditing={() => inputRef2.current?.focus()}
@@ -137,7 +135,7 @@ const LoginScreen: React.FC = () => {
           <ButtonComp
             title="Sign in"
             onPress={handleSubmit(onSubmit)}
-            backgroundColor={Colors.primary}
+            backgroundColor={colors.primary}
             buttonStyle={{marginTop: verticalScale(30)}}
           />
           <Label

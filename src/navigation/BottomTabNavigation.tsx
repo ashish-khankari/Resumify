@@ -1,11 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {APP_ROUTES} from './routes';
 import React from 'react';
-import {Colors, Images} from '../theme';
 import {Image, StyleSheet} from 'react-native';
 import {horizontalScale, verticalScale} from '../../Metrics';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import {colors, images} from '../theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,24 +22,24 @@ const screenOptions = ({route}: {route: any}) => ({
     size: number;
   }) => {
     let iconName;
-    let iconTintColor = focused ? Colors.primary : Colors.black;
+    let iconTintColor = focused ? colors.primary : colors.black;
     switch (route.name) {
       case APP_ROUTES.BOTTOM.HomeBottomTab:
-        iconName = focused ? Images.HomeDarkIcon : Images.HomeIcon;
+        iconName = focused ? images.HomeDarkIcon : images.HomeIcon;
         break;
       case APP_ROUTES.BOTTOM.PROFILE:
-        iconName = focused ? Images.ProfileDarkIcon : Images.ProfileLightIcon;
+        iconName = focused ? images.ProfileDarkIcon : images.ProfileLightIcon;
         break;
       case APP_ROUTES.BOTTOM.RESUMES:
-        iconName = Images.ResumeIcon;
+        iconName = images.ResumeIcon;
         break;
       case APP_ROUTES.BOTTOM.NOTIFICATION:
         iconName = focused
-          ? Images.NotificationDarkIcon
-          : Images.NotificationIcon;
+          ? images.NotificationDarkIcon
+          : images.NotificationIcon;
         break;
       default:
-        iconName = Images.Facebook;
+        iconName = images.Facebook;
     }
     return (
       <>
